@@ -49,6 +49,16 @@ int secondLargest(int arr[], int size){
     return secondLargest;
 }
 
+int countVowels(char arr[]) {
+    int count = 0;
+    for (int i=0; arr[i] != '\0'; i++){
+        if (arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u'){
+            count++;
+        }
+    }
+    return count;
+}
+
 int main() {
     // Exercise Week 3
 //    char firstName[20];
@@ -88,9 +98,13 @@ int main() {
 //        printf("%d", numArr[k]);
 //    }
 
-    int numArr[] = {1, 2, 6, 2, 5, 6};
-    int size = 5;
-    int num = secondLargest(numArr, size);
+//    int numArr[] = {1, 2, 6, 68, 69, 6};
+//    int size = 5;
+//    int num = secondLargest(numArr, size);
+//    printf("%d\n", num);
+
+    char charStr[] = "voooooooooooooooowel!";
+    int num = countVowels(charStr);
     printf("%d\n", num);
     return 0;
 }
