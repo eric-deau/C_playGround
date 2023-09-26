@@ -33,6 +33,22 @@ void removeDuplicate(int arr[], int size){
     }
 }
 
+int secondLargest(int arr[], int size){
+    int largest = 0;
+    int secondLargest = 0;
+    for (int i=0; i<=size; i++) {
+        if (arr[i] > largest) {
+            largest = arr[i];
+        }
+    }
+    for (int j=0; j <= size;j++) {
+        if (secondLargest < arr[j] && arr[j] != largest){
+            secondLargest = arr[j];
+        }
+    }
+    return secondLargest;
+}
+
 int main() {
     // Exercise Week 3
 //    char firstName[20];
@@ -60,16 +76,21 @@ int main() {
 //        printf("%d", numArr[k]);
 //    }
 
-    int numArr[] = {1, 2, 2, 2, 5, 6};
+//    int numArr[] = {1, 2, 2, 2, 5, 6};
+//    int size = 5;
+//    printf("Before: \n");
+//    for (int j=0;j<=size;j++){
+//        printf("%d ", numArr[j]);
+//    }
+//    removeDuplicate(numArr, size);
+//    printf("After: \n");
+//    for (int k=0;k<=size;k++){
+//        printf("%d", numArr[k]);
+//    }
+
+    int numArr[] = {1, 2, 6, 2, 5, 6};
     int size = 5;
-    printf("Before: \n");
-    for (int j=0;j<=size;j++){
-        printf("%d ", numArr[j]);
-    }
-    removeDuplicate(numArr, size);
-    printf("After: \n");
-    for (int k=0;k<=size;k++){
-        printf("%d", numArr[k]);
-    }
+    int num = secondLargest(numArr, size);
+    printf("%d\n", num);
     return 0;
 }
