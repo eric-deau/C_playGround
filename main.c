@@ -23,6 +23,16 @@ void reverseArray(int arr[], int size){
     }
 }
 
+void removeDuplicate(int arr[], int size){
+    for(int i=0;i<size;i++){
+        for(int j=i+1;j<=size;j++){
+            if(arr[i] == arr[j]){
+                arr[j] = 0;
+            }
+        }
+    }
+}
+
 int main() {
     // Exercise Week 3
 //    char firstName[20];
@@ -38,13 +48,25 @@ int main() {
 //    int index = lookForIndex(element, numArr, size);
 //    printf("The index is: %d", index);
 
-    int numArr[] = {1, 2, 3, 4, 5, 6};
+//    int numArr[] = {1, 2, 3, 4, 5, 6};
+//    int size = 5;
+//    printf("Before: \n");
+//    for (int j=0;j<=size;j++){
+//        printf("%d ", numArr[j]);
+//    }
+//    reverseArray(numArr, size);
+//    printf("After: \n");
+//    for (int k=0;k<=size;k++){
+//        printf("%d", numArr[k]);
+//    }
+
+    int numArr[] = {1, 2, 2, 2, 5, 6};
     int size = 5;
     printf("Before: \n");
     for (int j=0;j<=size;j++){
         printf("%d ", numArr[j]);
     }
-    reverseArray(numArr, size);
+    removeDuplicate(numArr, size);
     printf("After: \n");
     for (int k=0;k<=size;k++){
         printf("%d", numArr[k]);
