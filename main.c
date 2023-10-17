@@ -90,13 +90,33 @@ bool wordSearch(char *fileName, char *target) {
     return false;
 }
 
-int main() {
-    if (wordSearch("test.txt", "hellotest")) {
-        printf("Target found!\n");
-    } else {
-        printf("Target not found!\n");
+void populateArray(int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Enter a number: \n");
+        scanf("%d", &arr[i]);
     }
+}
+
+int main() {
     // 2023-10-16 Practice
+
+    // Prompt user for array and elements
+    int arrSize;
+    printf("Enter the size of the array: \n");
+    scanf("%d", &arrSize);
+    int numArr[arrSize];
+    populateArray(numArr, arrSize);
+    printf("Before: \n");
+    for (int i = 0; i < arrSize; i++) {
+        printf("%d ", numArr[i]);
+    }
+    printf("\n");
+    reverseArray(numArr, arrSize);
+    printf("After: \n");
+    for (int i = 0; i < arrSize; i++) {
+        printf("%d ", numArr[i]);
+    }
+    printf("\n");
     // Palindrome Checker
 //    char palindrome[20];
 //    printf("Please enter a palindrome.\n");
@@ -108,7 +128,11 @@ int main() {
 //    }
 
 // Look for specific word in file
-
+//    if (wordSearch("test.txt", "hellotest")) {
+//        printf("Target found!\n");
+//    } else {
+//        printf("Target not found!\n");
+//    }
 
     // Exercise Week 3
 //    char firstName[20];
