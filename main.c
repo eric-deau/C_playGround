@@ -74,6 +74,28 @@ bool isPalindrome(const char arr[]) {
     return true;
 }
 
+bool searchKeyword(const char *text, const char *keyword) {
+    int textLen = strlen(text);
+    int keywordLen = strlen(keyword);
+
+    for (int i = 0; i <= textLen - keywordLen; i++) {
+        int j;
+
+        // Check if the keyword matches at the current position
+        for (j = 0; j < keywordLen; j++) {
+            if (text[i + j] != keyword[j]) {
+                break;
+            }
+        }
+
+        if (j == keywordLen) {
+            return true; // Keyword found
+        }
+    }
+
+    return false; // Keyword not found
+}
+
 bool wordSearch(char *fileName, char *target) {
     FILE *file = fopen(fileName, "r");
     if (file == NULL) {
@@ -82,13 +104,18 @@ bool wordSearch(char *fileName, char *target) {
     }
     char line[1000];
     while (fgets(line, sizeof(line), file)) {
-        if (strstr(line, target) != NULL) {
+//        if (strstr(line, target) != NULL) {
+//            fclose(file);
+//            return 1;
+//        }
+        if (searchKeyword(line, target) != NULL) {
             fclose(file);
-            return 1;
+            return true;
         }
     }
     return false;
 }
+
 
 void populateArray(int *arr, int size) {
     for (int i = 0; i < size; i++) {
@@ -101,22 +128,22 @@ int main() {
     // 2023-10-16 Practice
 
     // Prompt user for array and elements
-    int arrSize;
-    printf("Enter the size of the array: \n");
-    scanf("%d", &arrSize);
-    int numArr[arrSize];
-    populateArray(numArr, arrSize);
-    printf("Before: \n");
-    for (int i = 0; i < arrSize; i++) {
-        printf("%d ", numArr[i]);
-    }
-    printf("\n");
-    reverseArray(numArr, arrSize);
-    printf("After: \n");
-    for (int i = 0; i < arrSize; i++) {
-        printf("%d ", numArr[i]);
-    }
-    printf("\n");
+//    int arrSize;
+//    printf("Enter the size of the array: \n");
+//    scanf("%d", &arrSize);
+//    int numArr[arrSize];
+//    populateArray(numArr, arrSize);
+//    printf("Before: \n");
+//    for (int i = 0; i < arrSize; i++) {
+//        printf("%d ", numArr[i]);
+//    }
+//    printf("\n");
+//    reverseArray(numArr, arrSize);
+//    printf("After: \n");
+//    for (int i = 0; i < arrSize; i++) {
+//        printf("%d ", numArr[i]);
+//    }
+//    printf("\n");
     // Palindrome Checker
 //    char palindrome[20];
 //    printf("Please enter a palindrome.\n");
@@ -128,11 +155,11 @@ int main() {
 //    }
 
 // Look for specific word in file
-//    if (wordSearch("test.txt", "hellotest")) {
-//        printf("Target found!\n");
-//    } else {
-//        printf("Target not found!\n");
-//    }
+    if (wordSearch("test.txt", "hello")) {
+        printf("Target found!\n");
+    } else {
+        printf("Target not found!\n");
+    }
 
     // Exercise Week 3
 //    char firstName[20];
