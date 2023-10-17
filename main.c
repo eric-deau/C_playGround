@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 
 int lookForIndex(int element, int arr[], int size){
     for(int i=0;i<size;i++){
@@ -13,7 +15,7 @@ void reverseArray(int arr[], int size){
     int temp;
     int index = 0;
 //    int ptr = 0;
-    for (int i=size;i>size/2;i--){
+    for (int i=size-1;i>=size/2;i--){
         temp = arr[i];
         arr[i] = arr[index];
         arr[index] = temp;
@@ -59,7 +61,32 @@ int countVowels(char arr[]) {
     return count;
 }
 
+bool isPalindrome(const char arr[]) {
+    int start = 0;
+    int end = strlen(arr) - 1;
+    while (start < end) {
+        if (arr[start] != arr[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}
+
 int main() {
+    // 2023-10-16 Practice
+    // Palindrome Checker
+    char palindrome[20];
+    printf("Please enter a palindrome.\n");
+    scanf("%s", palindrome);
+    if (isPalindrome(palindrome)) {
+        printf("This is a palindrome!\n");
+    } else {
+        printf("This is not a palindrome.\n");
+    }
+//    isPalindrome(palindrome);
+
     // Exercise Week 3
 //    char firstName[20];
 //    char lastName[20];
@@ -75,15 +102,16 @@ int main() {
 //    printf("The index is: %d", index);
 
 //    int numArr[] = {1, 2, 3, 4, 5, 6};
-//    int size = 5;
+//    int size = 6;
 //    printf("Before: \n");
-//    for (int j=0;j<=size;j++){
+//    for (int j=0;j<size;j++){
 //        printf("%d ", numArr[j]);
 //    }
+//    printf("\n");
 //    reverseArray(numArr, size);
 //    printf("After: \n");
-//    for (int k=0;k<=size;k++){
-//        printf("%d", numArr[k]);
+//    for (int k=0;k<size;k++){
+//        printf("%d ", numArr[k]);
 //    }
 
 //    int numArr[] = {1, 2, 2, 2, 5, 6};
@@ -103,8 +131,8 @@ int main() {
 //    int num = secondLargest(numArr, size);
 //    printf("%d\n", num);
 
-    char charStr[] = "voooooooooooooooowel!";
-    int num = countVowels(charStr);
-    printf("%d\n", num);
+//    char charStr[] = "voooooooooooooooowel!";
+//    int num = countVowels(charStr);
+//    printf("%d\n", num);
     return 0;
 }
