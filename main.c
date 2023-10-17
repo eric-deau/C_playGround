@@ -74,18 +74,41 @@ bool isPalindrome(const char arr[]) {
     return true;
 }
 
+bool wordSearch(char *fileName, char *target) {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        printf("Could not open this file for reading.\n");
+        return false;
+    }
+    char line[1000];
+    while (fgets(line, sizeof(line), file)) {
+        if (strstr(line, target) != NULL) {
+            fclose(file);
+            return 1;
+        }
+    }
+    return false;
+}
+
 int main() {
+    if (wordSearch("test.txt", "hellotest")) {
+        printf("Target found!\n");
+    } else {
+        printf("Target not found!\n");
+    }
     // 2023-10-16 Practice
     // Palindrome Checker
-    char palindrome[20];
-    printf("Please enter a palindrome.\n");
-    scanf("%s", palindrome);
-    if (isPalindrome(palindrome)) {
-        printf("This is a palindrome!\n");
-    } else {
-        printf("This is not a palindrome.\n");
-    }
-//    isPalindrome(palindrome);
+//    char palindrome[20];
+//    printf("Please enter a palindrome.\n");
+//    scanf("%s", palindrome);
+//    if (isPalindrome(palindrome)) {
+//        printf("This is a palindrome!\n");
+//    } else {
+//        printf("This is not a palindrome.\n");
+//    }
+
+// Look for specific word in file
+
 
     // Exercise Week 3
 //    char firstName[20];
