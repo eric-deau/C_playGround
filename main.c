@@ -222,12 +222,6 @@ void reverseSentence(char *sentence) {
     printf("\n");
 }
 
-#define MAX_WORD_LENGTH 100
-
-struct hashTable {
-    char word[MAX_WORD_LENGTH];
-    int count;
-};
 
 void eachWordFrequency(char *fileName) {
     FILE* file = fopen(fileName, "r");
@@ -264,6 +258,43 @@ void eachWordFrequency(char *fileName) {
     }
     if (max_index != -1){
         printf("%s %d", wordArray[max_index], max_value);
+    }
+}
+
+
+#define MAX_WORD_LENGTH 100
+#define MAX_WORD 500
+struct wordCounter {
+    char string[MAX_WORD_LENGTH];
+    int occurrence;
+};
+
+void structWordFreq(char *fileName) {
+    FILE* file = fopen("hello.txt", "r");
+    struct wordCounter counterArray[MAX_WORD];
+    int numberOfValidWord = 0;
+    char temp_word[MAX_WORD_LENGTH];
+
+    if (file != NULL) {
+        while (fscanf(file, "%s", temp_word) != EOF) {
+            int wordExists = 0;
+            for (int i = 0; i < numberOfValidWord; i++) {
+                if (strcmp(temp_word, counterArray[i].string) == 0) {
+                    counterArray[i].occurrence++;
+                    wordExists = 1;
+                    break;
+                }
+            }
+            if (!wordExists && numberOfValidWord < MAX_WORD) {
+                strcpy(counterArray[numberOfValidWord].string, temp_word);
+                counterArray[numberOfValidWord].occurrence = 1;
+                numberOfValidWord++;
+            }
+        }
+        fclose(file);
+        for (int i = 0; i < numberOfValidWord; i++) {
+            printf("%s, %d\n", counterArray[i].string, counterArray[i].occurrence);
+        }
     }
 }
 
