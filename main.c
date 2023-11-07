@@ -124,7 +124,49 @@ void populateArray(int *arr, int size) {
     }
 }
 
+int wordCount(char *fileName) {
+    int count = 0;
+    int inWord = 0;
+    char ch;
+    FILE *fp = fopen(fileName, "r");
+    if (fp == NULL) {
+        printf("Could not open this file for reading. \n");
+        return false;
+    }
+
+//    while ((ch = fgetc(fp)) != EOF) {
+//        printf("count: %d, char: %c\n", count, ch);
+//        if (ch == ' ' || ch == '\n') {
+//            count++;
+//        }
+//    }
+
+    while ((ch = fgetc(fp)) != EOF) {
+        if (ch == ' ' || ch == '\n') {
+            if (inWord) {
+                // We were inside a word, and we found a space character.
+                inWord = 0;
+            }
+        } else {
+            // We found a non-space character.
+            if (!inWord) {
+                // We were not inside a word, so we're starting a new word.
+                count++;
+                inWord = 1;
+            }
+        }
+    }
+
+//    if (ch == ' ' || ch == '\n' || ch == EOF) {
+//        count++;
+//    }
+    fclose(fp);
+    return count;
+}
+
 int main() {
+    int result = wordCount("test.txt");
+    printf("%d\n", result);
     // 2023-10-16 Practice
 
     // Prompt user for array and elements
@@ -155,11 +197,11 @@ int main() {
 //    }
 
 // Look for specific word in file
-    if (wordSearch("test.txt", "hello")) {
-        printf("Target found!\n");
-    } else {
-        printf("Target not found!\n");
-    }
+//    if (wordSearch("test.txt", "hello")) {
+//        printf("Target found!\n");
+//    } else {
+//        printf("Target not found!\n");
+//    }
 
     // Exercise Week 3
 //    char firstName[20];
