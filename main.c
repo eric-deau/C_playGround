@@ -268,8 +268,15 @@ void eachWordFrequency(char *fileName) {
 }
 
 int countDigits(int n) {
+    if (n < 0) {
+        n = -n;
+    }
     if (n == 0) {
+        return 1;
+    } else if (n == 1) {
         return n;
+    } else if (n < 10) {
+        return 1;
     }
     return 1 + countDigits(n / 10);
 }
@@ -284,7 +291,7 @@ int main() {
     reverseWord("ofdsahbfdasuo");
     reverseSentence("Hello my name is");
 
-    int count = countDigits(123454321);
+    int count = countDigits(-9);
     printf("count: %d\n", count);
 
     // 2023-10-16 Practice
