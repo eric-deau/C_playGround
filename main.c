@@ -164,9 +164,73 @@ int wordCount(char *fileName) {
     return count;
 }
 
+int wordFrequency(char *fileName, char *target) {
+    FILE *fp = fopen(fileName, "r");
+    int count = 0;
+    int index = 0;
+    char arr[strlen(target) + 1];
+    char ch;
+    while ((ch = fgetc(fp)) != EOF) {
+        if (ch != ' ') {
+            arr[index] = ch;
+            index++;
+            if (index == strlen(target)) {
+                arr[index + 1] = '\0';
+//                printf("arr: %s\n", arr);
+                if (strcmp(arr, target) == 0) {
+                    count++;
+                } else {
+                    for (int i = 0; i < strlen(arr); i++) {
+                        arr[i] = ' ';
+                    }
+                    index = 0;
+                }
+            }
+        } else {
+            for (int i = 0; i < strlen(arr); i++) {
+                arr[i] = ' ';
+            }
+            index = 0;
+        }
+    }
+    printf("count: %d\n", count);
+    fclose(fp);
+    return count;
+}
+
+void reverseWord(char *word) {
+    for (int i = strlen(word) - 1; i >= 0; i--) {
+        printf("%c", word[i]);
+    }
+    printf("\n");
+}
+
+void reverseSentence(char *sentence) {
+    int sentenceLen = strlen(sentence);
+    int indexFlag = strlen(sentence);
+    for (int i = strlen(sentence); i >= 0; i--) {
+        if (i == 0 || sentence[i] == ' ') {
+            if (i == 0) {
+                printf("%c", sentence[i]);
+            }
+            for (int j = i + 1; j < indexFlag; j++) {
+                printf("%c", sentence[j]);
+            }
+            printf(" ");
+            indexFlag = i;
+        }
+    }
+}
+
 int main() {
-    int result = wordCount("test.txt");
-    printf("%d\n", result);
+//    int result = wordCount("test.txt");
+//    printf("%d\n", result);
+
+    int wordFreq = wordFrequency("test.txt", "eric");
+    printf("%d\n", wordFreq);
+
+    reverseWord("ofdsahbfdasuo");
+    reverseSentence("Hello my name is");
     // 2023-10-16 Practice
 
     // Prompt user for array and elements
