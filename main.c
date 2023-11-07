@@ -176,7 +176,6 @@ int wordFrequency(char *fileName, char *target) {
             index++;
             if (index == strlen(target)) {
                 arr[index + 1] = '\0';
-//                printf("arr: %s\n", arr);
                 if (strcmp(arr, target) == 0) {
                     count++;
                 } else {
@@ -220,17 +219,74 @@ void reverseSentence(char *sentence) {
             indexFlag = i;
         }
     }
+    printf("\n");
+}
+
+#define MAX_WORD_LENGTH 100
+
+struct hashTable {
+    char word[MAX_WORD_LENGTH];
+    int count;
+};
+
+void eachWordFrequency(char *fileName) {
+    FILE* file = fopen(fileName, "r");
+    char wordArray[500][100] = {'\0'};
+    int counterArray[500] = {0};
+    int max_value = 0;
+    int max_index = -1;
+    char temp_word[100];
+    if (file != NULL) {
+        while (fscanf(file, "%s", temp_word) != EOF) {
+            int wordExists = 0;
+            for (int i = 0; i < 500; i++) {
+                if (strcmp(temp_word, wordArray[i]) == 0) {
+                    counterArray[i] += 1;
+                    wordExists = 1;
+                    if (counterArray[i] > max_value) {
+                        max_value = counterArray[i];
+                        max_index = i;
+                    }
+                    break;
+                }
+            }
+            if (!wordExists) {
+                // If the word doesn't exist in wordArray, add it and set the count to 1
+                for (int i = 0; i < 500; i++) {
+                    if (wordArray[i][0] == '\0') {
+                        strcpy(wordArray[i], temp_word);
+                        counterArray[i] = 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if (max_index != -1){
+        printf("%s %d", wordArray[max_index], max_value);
+    }
+}
+
+int countDigits(int n) {
+    if (n == 0) {
+        return n;
+    }
+    return 1 + countDigits(n / 10);
 }
 
 int main() {
+    // 2023-11-06 practice
 //    int result = wordCount("test.txt");
 //    printf("%d\n", result);
-
     int wordFreq = wordFrequency("test.txt", "eric");
     printf("%d\n", wordFreq);
 
     reverseWord("ofdsahbfdasuo");
     reverseSentence("Hello my name is");
+
+    int count = countDigits(123454321);
+    printf("count: %d\n", count);
+
     // 2023-10-16 Practice
 
     // Prompt user for array and elements
