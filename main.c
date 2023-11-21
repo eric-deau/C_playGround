@@ -403,44 +403,51 @@ int countDigits(int n) {
 //    return 0;
 //}
 
-#include <stdio.h>
 #include <stdlib.h>
-#define MAX_NAME_LENGTH 20
-#define MAX_TITLE_LENGTH 30
+#include <stdio.h>
 
-struct Book {
-    char title[MAX_TITLE_LENGTH];
-    char author[MAX_NAME_LENGTH];
-    int pages;
+#define MAX_NAME_LENGTH 20
+#define MAX_DEPT_NAME_LENGTH 20
+
+struct Employee {
+    int employeeID;
+    char employeeName[MAX_NAME_LENGTH];
+    char dept[MAX_DEPT_NAME_LENGTH];
+    float salary;
 };
 
-void printBooks(struct Book *currBooks, int numBooks) {
-    for (int j = 0; j < numBooks; j++) {
-        printf("Title: %s Author: %s Pages: %d\n", currBooks[j].title, currBooks[j].author, currBooks[j].pages);
+void searchForEmployee(struct Employee *currEmployees, int numOfEmployees, int targetEmployee) {
+    if (targetEmployee > numOfEmployees || targetEmployee < 0) {
+        printf("Employee not in database!\n");
+    } else {
+        for (int i = 0; i < numOfEmployees; i++) {
+            if (currEmployees[i].employeeID == targetEmployee) {
+                printf("ID: %d\n", currEmployees[i].employeeID);
+                printf("Name: %s\n", currEmployees[i].employeeName);
+                printf("Department: %s\n", currEmployees[i].dept);
+                printf("Salary: %f\n", currEmployees[i].salary);
+            }
+        }
     }
 }
 
 int main() {
-    int numOfBooks;
-    printf("Enter the number of books:\n");
-    scanf("%d", &numOfBooks);
-    struct Book *books = (struct Book*)malloc(numOfBooks * sizeof(struct Book));
-    if (books == NULL) {
-        printf("Memory allocation failed.\n");
-        return -1;
-    }
-    for (int i = 0; i < numOfBooks; i++) {
-        printf("Enter the book title:");
-        scanf("%s", books[i].title);
+    int numOfEmployees;
+    printf("Enter the number of employees:");
+    scanf("%d", &numOfEmployees);
+    struct Employee *employees = malloc(numOfEmployees * sizeof(struct Employee));
+    for (int i = 0; i < numOfEmployees; i++) {
+        employees[i].employeeID = i + 1;
+        printf("Enter the employee name:");
+        scanf("%s", employees[i].employeeName);
         getchar();
-        printf("Enter the author name:");
-        scanf("%s", books[i].author);
+        printf("Enter the employee department:");
+        scanf("%s", employees[i].dept);
         getchar();
-        printf("Enter the number of pages:");
-        scanf("%d", &books[i].pages);
+        printf("Enter the employee salary:");
+        scanf("%f", &employees[i].salary);
         getchar();
     }
-    printBooks(books, numOfBooks);
-    free(books);
+    searchForEmployee(employees, numOfEmployees, 2);
     return 0;
 }
