@@ -12,6 +12,23 @@ struct studentRecords {
     char grades[MAX_COURSES];
 };
 
+void writeToFile(int numberOfStudents, struct studentRecords *studentRecord) {
+    FILE* fp = fopen("student_records.txt", "w");
+    if (fp == NULL) {
+        printf("File can't be opened!");
+        return;
+    }
+    for (int i = 0; i < numberOfStudents; i++) {
+        fprintf(fp, "Student ID: %d\n", studentRecord[i].studentID);
+        fprintf(fp, "Student Name: %s\n", studentRecord[i].studentName);
+        fprintf(fp, "%s", "Courses and Grades :\n");
+        for (int k = 0; k < MAX_COURSES; k++) {
+            fprintf(fp, "%s: %c\n", studentRecord[i].courses[k], studentRecord[i].grades[k]);
+        }
+    }
+    fclose(fp);
+}
+
 int main() {
     int numOfStudents = 0;
 
@@ -37,13 +54,6 @@ int main() {
             scanf(" %c", &records_1[i].grades[j]);
         }
     }
-
-    for (int j = 0; j < numOfStudents; j++) {
-        printf("Student ID: %d\n", records_1[j].studentID);
-        printf("Student name: %s\n", records_1[j].studentName);
-        for (int k = 0; k < MAX_COURSES; k++) {
-            printf("Course: %s Grade: %c\n", records_1[j].courses[k], records_1[j].grades[j]);
-        }
-    }
+    writeToFile(numOfStudents, records_1);
     return 0;
 }
