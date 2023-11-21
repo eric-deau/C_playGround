@@ -25,6 +25,7 @@ void writeToFile(int numberOfStudents, struct studentRecords *studentRecord) {
         for (int k = 0; k < MAX_COURSES; k++) {
             fprintf(fp, "%s: %c\n", studentRecord[i].courses[k], studentRecord[i].grades[k]);
         }
+        fprintf(fp, "%s", "\n");
     }
     fclose(fp);
 }
@@ -55,5 +56,6 @@ int main() {
         }
     }
     writeToFile(numOfStudents, records_1);
+    printf("File saved successfully!\n");
     return 0;
 }
